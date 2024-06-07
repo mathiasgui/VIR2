@@ -1,0 +1,28 @@
+version: '3'
+services:
+  laboratoire-1:
+    build:
+      context: .
+      dockerfile: DockerfilePentester
+    ports:
+      - "8001:80"
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    networks:
+      - labLan-1
+
+  pirate-1:
+    build:
+      context: .
+      dockerfile: DockerfilePirate
+    ports:
+      - "2201:22"
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    networks:
+      - labLan-1
+
+networks:
+  labLan-1:
+    driver: bridge
+
